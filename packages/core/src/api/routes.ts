@@ -474,6 +474,10 @@ export const registerApiRoutes = async (
     return { status: "ok", timestamp: new Date().toISOString() };
   });
 
+  fastify.get("/v1/models", async () => {
+    return fastify.providerService.getAvailableModels();
+  });
+
   const transformersWithEndpoint =
     fastify.transformerService.getTransformersWithEndpoint();
 
