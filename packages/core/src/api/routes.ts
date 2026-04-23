@@ -479,8 +479,16 @@ export const registerApiRoutes = async (
     const data = models.data.map((m: any) => ({
       type: "model",
       id: m.id,
-      display_name: m.id.replace(/-/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase()),
+      display_name: m.id,
       created_at: "2025-01-01T00:00:00Z",
+      max_input_tokens: 200000,
+      max_tokens: 128000,
+      capabilities: {
+        thinking: { supported: true, types: { enabled: { supported: false }, adaptive: { supported: true } } },
+        image_input: { supported: true },
+        pdf_input: { supported: true },
+        structured_outputs: { supported: true },
+      },
     }));
     return {
       data,
