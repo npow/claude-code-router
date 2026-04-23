@@ -475,7 +475,19 @@ export const registerApiRoutes = async (
   });
 
   fastify.get("/v1/models", async () => {
-    return fastify.providerService.getAvailableModels();
+    const models = await fastify.providerService.getAvailableModels();
+    const data = models.data.map((m: any) => ({
+      type: "model",
+      id: m.id,
+      display_name: m.id.replace(/-/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase()),
+      created_at: "2025-01-01T00:00:00Z",
+    }));
+    return {
+      data,
+      has_more: false,
+      first_id: data[0]?.id || "",
+      last_id: data[data.length - 1]?.id || "",
+    };
   });
 
   const transformersWithEndpoint =
