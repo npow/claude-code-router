@@ -9,3 +9,5 @@ tsconfig.tsbuildinfo
 # Documentation build output
 docs/build
 docs/.docusaurus
+.omc/
+packages/*/dist/
